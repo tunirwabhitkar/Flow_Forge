@@ -1,0 +1,57 @@
+version: '3.9'
+
+# Development overrides — use with: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+
+  flowforge:
+    build:
+      context: .
+      target: base
+    command: pnpm --filter @flowforge/backend dev
+    environment:
+      NODE_ENV: development
+      DB_TYPE: sqlite
+      DB_SQLITE_DATABASE: /data/flowforge-dev.db
+      EXECUTIONS_MODE: regular
+      LOG_LEVEL: debug
+      FLOWFORGE_ENCRYPTION_KEY: dev-encryption-key-32-chars!!!!
+      JWT_SECRET: dev-jwt-secret-32-chars-long!!!!
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/packages/core/node_modules
+      - /app/packages/backend/node_modules
+      - /app/packages/nodes/node_modules
+      - /app/packages/ai/node_modules
+      - flowforge-dev-data:/data
+    ports:
+      - "5678:5678"
+    depends_on: []  # No postgres/redis in SQLite dev mode
+
+  frontend:
+    build:
+      context: .
+      target: base
+    command: pnpm --filter @flowforge/frontend dev
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/packages/frontend/node_modules
+    ports:
+      - "5173:5173"
+
+  # Keep postgres/redis available if EXECUTIONS_MODE=queue
+  postgres:
+    ports:
+      - "5432:5432"
+
+  redis:
+    ports:
+      - "6379:6379"
+
+volumes:
+  flowforge-dev-data:
+    driver: local

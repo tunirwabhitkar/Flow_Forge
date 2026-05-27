@@ -1,0 +1,180 @@
+/* ─── FlowForge Global Styles ─────────────────────────────────────────────── */
+
+:root {
+  --ff-purple: #6E56CF;
+  --ff-purple-light: #8B70E8;
+  --ff-purple-dark: #5340A8;
+  --ff-blue: #2196F3;
+  --ff-green: #31C48D;
+  --ff-orange: #F59E0B;
+  --ff-red: #EF4444;
+  --ff-dark: #1a1a2e;
+
+  --ff-canvas-bg: #f1f3f8;
+  --ff-sidebar-bg: #1a1a2e;
+  --ff-card-radius: 12px;
+  --ff-node-radius: 10px;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d7de transparent;
+}
+
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: #d4d7de; border-radius: 3px; }
+*::-webkit-scrollbar-thumb:hover { background: #b0b5bf; }
+
+/* ─── Typography ──────────────────────────────────────────────────────────── */
+
+code, pre, .mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.875em;
+}
+
+/* ─── Element Plus Overrides ──────────────────────────────────────────────── */
+
+.el-button--primary {
+  --el-button-bg-color: var(--ff-purple);
+  --el-button-border-color: var(--ff-purple);
+  --el-button-hover-bg-color: var(--ff-purple-light);
+  --el-button-hover-border-color: var(--ff-purple-light);
+  --el-button-active-bg-color: var(--ff-purple-dark);
+}
+
+.el-tag {
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.el-table .el-table__row {
+  cursor: pointer;
+}
+
+.el-table .el-table__row:hover > td {
+  background: var(--el-fill-color-lighter) !important;
+}
+
+.el-dialog {
+  border-radius: var(--ff-card-radius) !important;
+}
+
+.el-card {
+  border-radius: var(--ff-card-radius) !important;
+}
+
+/* ─── VueFlow Canvas ─────────────────────────────────────────────────────── */
+
+.vue-flow__edge-path {
+  stroke: #6E56CF !important;
+  stroke-width: 2 !important;
+}
+
+.vue-flow__edge.selected .vue-flow__edge-path {
+  stroke: #8B5CF6 !important;
+  stroke-width: 2.5 !important;
+}
+
+.vue-flow__edge-interaction {
+  stroke: transparent;
+  stroke-width: 16;
+  fill: none;
+  cursor: pointer;
+}
+
+.vue-flow__connection-path {
+  stroke: #6E56CF !important;
+  stroke-width: 2 !important;
+  stroke-dasharray: 5;
+  animation: dash 0.5s linear infinite;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -10; }
+}
+
+.vue-flow__controls {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.vue-flow__controls-button {
+  border: none !important;
+  background: white !important;
+  color: #374151 !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.vue-flow__controls-button:hover {
+  background: var(--el-fill-color) !important;
+}
+
+.vue-flow__minimap {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* ─── Transitions ────────────────────────────────────────────────────────── */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.slide-right-enter-from {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.slide-right-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+/* ─── Loading states ─────────────────────────────────────────────────────── */
+
+.skeleton-line {
+  height: 14px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 6px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Utilities ──────────────────────────────────────────────────────────── */
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}

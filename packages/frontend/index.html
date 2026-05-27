@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FlowForge — Self-hosted workflow automation platform" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>FlowForge</title>
+    <style>
+      /* Prevent FOUC */
+      html { visibility: hidden; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      // Reveal after Vue mounts to prevent flash
+      document.addEventListener('DOMContentLoaded', () => {
+        document.documentElement.style.visibility = 'visible';
+      });
+    </script>
+  </body>
+</html>
